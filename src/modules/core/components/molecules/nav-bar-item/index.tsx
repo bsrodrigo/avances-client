@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 interface NavBarItemProps {
   Icon: React.FC<Omit<HugeiconsProps, "ref"> & RefAttributes<SVGSVGElement>>;
   label: string;
+  redirectTo: string;
   isClosed?: boolean;
   isActive?: boolean;
 }
@@ -17,6 +18,7 @@ interface NavBarItemProps {
 export const NavBarItem = ({
   Icon,
   label,
+  redirectTo,
   isClosed,
   isActive,
 }: NavBarItemProps): JSX.Element => {
@@ -36,7 +38,7 @@ export const NavBarItem = ({
   const color = isActive ? theme.palette.primary.main : theme.palette.grey[600];
 
   return (
-    <NavBarItemBox isClosed={isClosed} onClick={() => navigate("items")}>
+    <NavBarItemBox isClosed={isClosed} onClick={() => navigate(redirectTo)}>
       <Box width={32}>
         <Icon color={color} type="solid" fontSize={theme.spacing(5)} />
       </Box>

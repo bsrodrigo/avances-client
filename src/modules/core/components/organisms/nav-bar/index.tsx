@@ -1,22 +1,20 @@
-import {
-  Home01Icon,
-  Money02Icon,
-  Payment01Icon,
-  Menu05Icon,
-  Menu11Icon,
-} from "hugeicons-react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+
+import { Menu05Icon, Menu11Icon } from "hugeicons-react";
+import { useAnimate } from "framer-motion";
 import { Box, Button, Typography, useTheme } from "@mui/material";
 
 import { NavBarBrand, NavBarItem } from "@/modules/core/components/molecules";
-import { useEffect, useState } from "react";
-import { useAnimate } from "framer-motion";
-import { set } from "date-fns";
 import { getLocalStorage, setLocalStorage } from "@/modules/core/infra/storage";
-import { get } from "http";
+
+import { menuList } from "./config";
 
 export const NavBar = (): JSX.Element => {
   const [scope, animate] = useAnimate();
   const theme = useTheme();
+  const { pathname } = useLocation();
+  console.log({ pathname });
 
   const isClosedInLocalStorage = getLocalStorage("navbar:isClosed");
   const [isClosed, setIsClosed] = useState<boolean>(
@@ -66,34 +64,38 @@ export const NavBar = (): JSX.Element => {
       </Button>
 
       <Box display="flex" flexDirection="column" gap={theme.spacing(2)}>
-        <Box display="flex" flexDirection="column" gap={theme.spacing(0.5)}>
-          <Typography variant="overline" color="textSecondary">
-            Home
-          </Typography>
-          <NavBarItem
-            Icon={Home01Icon}
-            label="home"
-            isClosed={isClosed}
-            isActive
-          />
-        </Box>
+        {menuList.map(({ items, title }) => {
+          const isGroupActive = items.some(
+            ({ redirectTo }) => pathname === redirectTo
+          );
 
-        <Box
-          display="flex"
-          flexDirection="column"
-          gap={theme.spacing(0.5)}
-          justifyContent={isClosed ? "center" : "flex-start"}
-        >
-          <Typography variant="overline" color="textSecondary">
-            Financeiro
-          </Typography>
-          <NavBarItem
-            Icon={Payment01Icon}
-            label="Compras"
-            isClosed={isClosed}
-          />
-          <NavBarItem Icon={Money02Icon} label="Vendas" isClosed={isClosed} />
-        </Box>
+          return (
+            <Box
+              key={`menu-group-box-${title}`}
+              display="flex"
+              flexDirection="column"
+              gap={theme.spacing(0.5)}
+            >
+              <Typography
+                variant="overline"
+                color={isGroupActive ? "primary" : "textSecondary"}
+              >
+                {title}
+              </Typography>
+
+              {items.map(({ label, Icon, redirectTo }) => (
+                <NavBarItem
+                  key={`menu-item-${label}`}
+                  label={label}
+                  Icon={Icon}
+                  redirectTo={redirectTo}
+                  isClosed={isClosed}
+                  isActive={pathname === redirectTo}
+                />
+              ))}
+            </Box>
+          );
+        })}
       </Box>
     </Box>
   );

@@ -1,5 +1,6 @@
 import { MenuBar } from "@/modules/core/components/organisms";
-import { createBrowserRouter, Navigate, Outlet } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
+import { partnersRoutes } from "../partners/routes";
 
 // TODO: Adicionar tracker pageview
 
@@ -23,7 +24,7 @@ export const router = createBrowserRouter([
       { index: true, element: <div>Home Page</div> },
       { path: "items", element: <div>Itens Page</div> },
       { path: "event-association", element: <div>event association Page</div> },
-
+      ...partnersRoutes,
       {
         path: "*",
         element: <div>A página não existe</div>,

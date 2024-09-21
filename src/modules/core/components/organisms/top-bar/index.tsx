@@ -12,7 +12,9 @@ interface TopBarProps {}
 
 export const TopBar = ({}: TopBarProps): JSX.Element => {
   const theme = useTheme();
-  const { mode, setMode } = useColorScheme();
+  const { mode, systemMode, setMode } = useColorScheme();
+
+  const currentMode = mode === "system" ? systemMode : mode;
 
   return (
     <Box
@@ -23,13 +25,14 @@ export const TopBar = ({}: TopBarProps): JSX.Element => {
     >
       <Box>
         <ThemeModeSwitch
-          // sx={{ m: 1 }}
-          checked={mode === "dark"}
+          sx={{ m: 1 }}
+          checked={currentMode === "dark"}
           onChange={(_event, checked) => {
             setMode(checked ? "dark" : "light");
           }}
         />
       </Box>
+
       <Box
         display="flex"
         alignItems="center"
@@ -43,6 +46,7 @@ export const TopBar = ({}: TopBarProps): JSX.Element => {
           <Typography variant="caption">Olá,</Typography>
           <Typography variant="body2">User name</Typography>
         </Box>
+
         <Avatar sx={{ width: 48, height: 48 }} />
       </Box>
     </Box>

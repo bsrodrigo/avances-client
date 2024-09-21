@@ -1,6 +1,4 @@
-import { ReactNode } from "react";
-
-import { Box, useColorScheme, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { NavBar, TopBar } from "@/modules/core/components/organisms";
 
@@ -8,8 +6,6 @@ interface MenuBarProps {}
 
 export const MenuBar = ({}: MenuBarProps): JSX.Element => {
   const theme = useTheme();
-  const { mode, setMode } = useColorScheme();
-  console.log({ mode });
 
   return (
     <Box display="flex" bgcolor={theme.palette.background.default}>
