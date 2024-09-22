@@ -1,9 +1,10 @@
 import { Header } from "@/modules/core/components/molecules";
-import { Card, CardHeader } from "@mui/material";
+import { PartnersContent } from "@/modules/partners/components/organisms";
+import { PartnersProvider } from "@/modules/partners/contexts/partners-context";
 
 const PartnersPage = (): JSX.Element => {
   return (
-    <div>
+    <PartnersProvider>
       <Header
         title="Parceiros"
         breadcrumbs={[
@@ -15,10 +16,8 @@ const PartnersPage = (): JSX.Element => {
         ]}
       />
 
-      <Card>
-        <CardHeader title="Lista de parceiros" />
-      </Card>
-    </div>
+      <PartnersContent />
+    </PartnersProvider>
   );
 };
 

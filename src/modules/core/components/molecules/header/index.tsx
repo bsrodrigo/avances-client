@@ -13,7 +13,7 @@ export interface HeaderProps {
 
 export const Header = ({ title, breadcrumbs }: HeaderProps): JSX.Element => {
   return (
-    <Box>
+    <Box marginBottom={5}>
       <Typography variant="h4">{title}</Typography>
       <Box>
         <Breadcrumbs separator="›">
