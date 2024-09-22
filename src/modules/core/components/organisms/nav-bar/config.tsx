@@ -1,4 +1,15 @@
-import { Home01Icon, HugeiconsProps } from "hugeicons-react";
+import {
+  BoxerIcon,
+  Clock02Icon,
+  ContactIcon,
+  Home01Icon,
+  HugeiconsProps,
+  InboxCheckIcon,
+  PackageIcon,
+  ShampooIcon,
+  UserGroupIcon,
+  WorkHistoryIcon,
+} from "hugeicons-react";
 
 interface MenuItem {
   label: string;
@@ -25,17 +36,37 @@ export const menuList: MenuGroup[] = [
     ],
   },
   {
-    title: "Partners",
+    title: "Estoque",
     items: [
       {
-        label: "Partners",
-        redirectTo: "/partners",
-        Icon: Home01Icon,
+        label: "Estoque",
+        redirectTo: "/inventory",
+        Icon: PackageIcon,
       },
       {
-        label: "Contacts",
+        label: "Histórico",
+        redirectTo: "/inventory/history",
+        Icon: InboxCheckIcon,
+      },
+      {
+        label: "Produtos",
+        redirectTo: "/inventory/products",
+        Icon: ShampooIcon,
+      },
+    ],
+  },
+  {
+    title: "Parceiros",
+    items: [
+      {
+        label: "Parceiros",
+        redirectTo: "/partners",
+        Icon: UserGroupIcon,
+      },
+      {
+        label: "Contatos",
         redirectTo: "/partners/contacts",
-        Icon: Home01Icon,
+        Icon: ContactIcon,
       },
     ],
   },

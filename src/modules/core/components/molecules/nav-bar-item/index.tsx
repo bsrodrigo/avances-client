@@ -1,4 +1,4 @@
-import { ReactNode, RefAttributes, useEffect } from "react";
+import { RefAttributes, useEffect } from "react";
 import { HugeiconsProps } from "hugeicons-react";
 
 import { Box, Typography, useTheme } from "@mui/material";
@@ -13,6 +13,7 @@ interface NavBarItemProps {
   redirectTo: string;
   isClosed?: boolean;
   isActive?: boolean;
+  onClick?: () => void;
 }
 
 export const NavBarItem = ({
@@ -21,14 +22,23 @@ export const NavBarItem = ({
   redirectTo,
   isClosed,
   isActive,
+  onClick,
 }: NavBarItemProps): JSX.Element => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [scope, animate] = useAnimate();
 
+  const handleOnClick = () => {
+    if (onClick) {
+      onClick();
+    }
+
+    navigate(redirectTo);
+  };
+
   useEffect(() => {
     if (isClosed) {
-      animate(scope.current, { width: 0, overflow: "hidden" });
+      animate(scope.current, { width: 0 });
       return;
     }
 
@@ -38,15 +48,21 @@ export const NavBarItem = ({
   const color = isActive ? theme.palette.primary.main : theme.palette.grey[600];
 
   return (
-    <NavBarItemBox isClosed={isClosed} onClick={() => navigate(redirectTo)}>
+    <NavBarItemBox
+      isClosed={isClosed}
+      onClick={handleOnClick}
+      textAlign={isClosed ? "center" : "left"}
+    >
       <Box width={32}>
         <Icon color={color} type="solid" fontSize={theme.spacing(5)} />
       </Box>
+
       <Typography
         ref={scope}
         variant="button"
         color={color}
-        marginBottom={-0.5}
+        width={isClosed ? 0 : "100%"}
+        overflow="hidden"
       >
         {label}
       </Typography>

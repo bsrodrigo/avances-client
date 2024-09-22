@@ -1,7 +1,23 @@
+import { Header } from "@/modules/core/components/molecules";
+import { Card, CardHeader } from "@mui/material";
+
 const PartnersPage = (): JSX.Element => {
   return (
     <div>
-      <h1>Contacts</h1>
+      <Header
+        title="Parceiros"
+        breadcrumbs={[
+          {
+            label: "Home",
+            redirectTo: "/",
+          },
+          { label: "Parceiros" },
+        ]}
+      />
+
+      <Card>
+        <CardHeader title="Lista de parceiros" />
+      </Card>
     </div>
   );
 };
