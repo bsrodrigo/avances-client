@@ -42,5 +42,8 @@
     "react-router-dom": "^6.4.2",
     "react-super-responsive-table": "^5.2.1",
     "yup": "^0.32.11"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
