@@ -1,10 +1,11 @@
 import axios from "axios";
 
-export const evaluationApi = axios.create({
-  baseURL: process.env.REACT_APP_API_HOST,
+export const avancesApi = axios.create({
+  // baseURL: process.env.REACT_APP_API_HOST,
+  baseURL: "https://avances-service-production.up.railway.app",
 });
 
-evaluationApi.interceptors.request.use((config) => {
+avancesApi.interceptors.request.use((config) => {
   //   const token = getFromLocalStorage('token')
 
   //   config.headers.Authorization = `Bearer ${token}`
